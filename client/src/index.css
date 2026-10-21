@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-bg text-ink font-sans antialiased;
+}
+
+::selection {
+  background: rgba(139, 124, 255, 0.35);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #262d3a transparent;
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-border bg-card;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium
+      transition duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/60
+      disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-purple text-[#0B0D12] hover:brightness-110 active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply btn border border-border bg-transparent text-ink hover:bg-elevated;
+  }
+  .input {
+    @apply w-full rounded-lg border border-border bg-elevated px-3 py-2 text-sm text-ink
+      placeholder:text-muted/70 transition focus:border-purple focus:outline-none focus:ring-2 focus:ring-purple/30;
+  }
+  .skeleton {
+    @apply relative overflow-hidden rounded-md bg-elevated;
+  }
+  .skeleton::after {
+    content: "";
+    @apply absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent;
+    animation: shimmer 1.4s infinite;
+  }
+  .gradient-text {
+    background-image: linear-gradient(90deg, #8b7cff, #35d6c4, #8b7cff);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradientShift 10s ease infinite;
+  }
+  .typing-dot {
+    @apply inline-block h-1.5 w-1.5 rounded-full bg-muted;
+    animation: blink 1.2s infinite;
+  }
+}
+
+/* Syntax colours (tokens from the design system) */
+.hljs-comment, .hljs-quote { color: #6b7686; font-style: italic; }
+.hljs-keyword, .hljs-selector-tag, .hljs-literal, .hljs-doctag, .hljs-meta .hljs-keyword { color: #8b7cff; }
+.hljs-string, .hljs-regexp, .hljs-addition, .hljs-meta .hljs-string { color: #35c98a; }
+.hljs-number, .hljs-built_in, .hljs-type, .hljs-symbol, .hljs-bullet { color: #f3b65b; }
+.hljs-title, .hljs-title.function_, .hljs-title.class_, .hljs-section, .hljs-selector-id, .hljs-selector-class { color: #35d6c4; }
+.hljs-attr, .hljs-attribute, .hljs-variable, .hljs-template-variable, .hljs-property { color: #9bb7ff; }
+.hljs-deletion, .hljs-tag, .hljs-name { color: #ff6b78; }
+.hljs-emphasis { font-style: italic; }
+.hljs-strong { font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
